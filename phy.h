@@ -1,6 +1,6 @@
 #ifndef PHY_H_INCLUDED
 #define PHY_H_INCLUDED
 
-ul_sch_type ul_sch_func(ul_sch_type mac_pdu);
-
+void physical_layer_call(ul_sch_type mac_pdu);/**mac_pdu is ULSCH channel passed from MAC layer**/
+                                              /**ul_sch_type is taken from MAC layer**/
 #endif // PHY_H_INCLUDED

@@ -14,7 +14,8 @@ typedef enum{
   spare1,
   spare2,
   establishment_cause_max=0xd
-}establishment_cause_enum_type;
+}establishment_cause_enum_type;  /**as we have only six values in establishment cause and we have select only one value
+                                we have taken establishment cause as enum type**/
 
 typedef struct {
   uint8_t mmec;
@@ -24,7 +25,8 @@ typedef struct {
 typedef union {
   s_tmsi_type s_tmsi;
   uint64_t randomValue;
-}ue_identity_type;
+}ue_identity_type;              /**in RRC Connection Request we send either S-TMSI or random value so we created
+                                ue_identity as union*/
 
 typedef struct  {
   ue_identity_type initial_ue_identity;
@@ -40,7 +42,9 @@ rrc_conc_reestablishment_req_type rrc_conc_reestablishment_req;
 typedef union srbtype srb_0_type;
 
 
-srb_0_type srb0_func();
+/*srb_0_type srb0_func();*/
+void rrc_init();                /**RRC_Init is a function used to pass SRB0 to RLC Layer**/
+                                /**srb_0 is a union which have info.elements as RRC Connection Request**/
 
 
 #endif
