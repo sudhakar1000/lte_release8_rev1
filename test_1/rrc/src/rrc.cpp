@@ -1,34 +1,25 @@
 //#include "rrc\inc\rrc.h"
-#include <stdio.h>
-#include "rrc.h"
-#include "../rlc/rlc.h"     /**RLC header is included because srb0_without security is defined in RLC,if you don't declare
-                            you will get implicit declaration error**/
+#include "../inc/rrc.h"
+#include <stdint.h>
+#include <iostream>
+/*
+  Structure to have commomon control channel IEs
+  */
+ul_ccch_message_type ul_ccch_message;
 
-void rrc_init()
+uint64_t mul(uint64_t n1, uint64_t n2)
 {
-  /* variable to have srb_0 values*/
-  rrc_pdu_type rrc_pdu;
-
-  /*intializing RRC connection request */
-  rrc_pdu.rrc_procedure.rrc_connection_request.establishment_cause             = mt_Access;
-  rrc_pdu.rrc_procedure.rrc_connection_request.initial_ue_identity.randomValue = 20;
-  rrc_pdu.rrc_info_ele_for_ulcch_enum = rrc_conn_req_e;
-
-  /**printf("random value %ld",srb_0.rrc_connection_request.initial_ue_identity.randomValue);**/
-  if (rrc_pdu.rrc_info_ele_for_ulcch_enum == rrc_conn_req_e)
-  {
-    printf("\nSRB0 is passed to RLC");
-    /**here function is passed whose definition is in rlc.c**/
-     /**here we are passing srb_0 argument because SRB carries message from RRC to RLC**/
-     rlc_ul_ccch(rrc_pdu);
-  }
-  else
-  {
-    printf("rrc crash");
-  }
+  return n1*n2;
 }
 
-void rrc_stub(int srb0)
+void rrc_int()
 {
-    printf("\nrrc_stub= %d",srb0);
+  rrc_connection_request_init();
+}
+
+void rrc_connection_request_init()
+{
+  ul_ccch_message.rrc_connection_request.establishment_cause = mt_Access;
+  ul_ccch_message.rrc_connection_request.initial_ue_identity.randomValue = RANDOM_VLAUE;
+  //srb0_without_secutity();
 }
